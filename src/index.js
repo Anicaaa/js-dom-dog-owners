@@ -12,12 +12,6 @@ for (let i = 0; i < data.length; i++) {
   dogListUl.append(dogListLi);
 
   dogListLi.addEventListener("click", function () {
-    console.log("Clicked dog:", dogs);
-
-    const removeNoDogForm = document.querySelector(".main__dog-section");
-    removeNoDogForm.remove();
-    console.log(removeNoDogForm);
-
     //Create Section Tag
     const mainDog = document.createElement("section");
     mainDog.setAttribute("class", "main__dog-section");
@@ -54,9 +48,9 @@ for (let i = 0; i < data.length; i++) {
     mainDog.append(em);
 
     //create p tag
-    const isGoodBoy = document.createElement("p");
-    isGoodBoy.innerText = dogs.isGoodDog;
-    mainDog.append(isGoodBoy);
+    const goodDog = document.createElement("p");
+    goodDog.innerText = dogs.isGoodDog;
+    mainDog.append(goodDog);
 
     //create button
     const dogButton = document.createElement("button");
@@ -66,6 +60,10 @@ for (let i = 0; i < data.length; i++) {
     //Link the main section with mainDog section
     const main = document.querySelector(".main");
     main.append(mainDog);
+
+    const removeNoDogForm = document.querySelector(".main__dog-section");
+    removeNoDogForm.remove();
+    console.log(removeNoDogForm);
 
     // ---- Part 2 ---- //
     const addButton = document.querySelector(".dogs-list__button--add");
@@ -126,20 +124,67 @@ for (let i = 0; i < data.length; i++) {
 
       //Link the mainDog section with the form
       mainDog.append(form);
+
+      // ---- Part 2 Add new Dog ---- //
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        //event.target[0]; //name
+        //event.target[1]; //image
+        //event.target[2]; //bio
+        const newDog = document.createElement("li");
+        newDog.setAttribute("class", "dogs-list__button");
+        newDog.innerText = event.target[0].value;
+        dogListUl.insertBefore(newDog, dogListUl.children[1]);
+
+        // when clicked, show dog info in this section
+        newDog.addEventListener("click", () => {
+          // clear the html
+          main.innerHTML = "";
+
+          // create elements
+          const h2 = document.createElement("h2");
+          h2.innerText = event.target[0].value;
+          main.append(h2);
+
+          const img = document.createElement("img");
+          img.setAttribute("src", event.target[1].value);
+          img.setAttribute("alt", "");
+          main.append(img);
+
+          const div = document.createElement("div");
+          div.setAttribute("class", "main__dog-section__desc");
+          main.append(div);
+
+          const h3 = document.createElement("h3");
+          h3.innerText = "Bio";
+          div.append(h3);
+
+          const p1 = document.createElement("p");
+          p1.innerText = event.target[2].value;
+          div.append(p1);
+
+          const p2 = document.createElement("p");
+          main.append(p2);
+
+          const em = document.createElement("em");
+          em.innerText = "is naughty?";
+          p2.append(em);
+
+          let strText;
+          if (!dogs.isGoodDog) {
+            str = " Yes!";
+          } else {
+            str = " No!";
+          }
+
+          const strTextTwo = document.createTextNode(" Yes!");
+          p2.appendChild(strTextTwo);
+
+          const dogbutton = document.createElement("button");
+          dogbutton.innerText = "Good dog!";
+          main.append(dogbutton);
+        });
+      });
     });
   });
 }
-
-/* <form class="form">
-
-        <label for="name">Dog's name</label>
-        <input type="text" id="name" name="name">
-
-        <label for="image">Dog's picture</label>
-        <input type="url" id="image" name="image">
-
-        <label for="bio">Dog's bio</label>
-        <textarea rows="5" id="bio" name="bio"></textarea>
-
-        <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
-      </form> */
