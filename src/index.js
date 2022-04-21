@@ -60,7 +60,6 @@ for (let i = 0; i < data.length; i++) {
 
     //create button
     const dogButton = document.createElement("button");
-    dogButton.setAttribute("class", "main__dog-section__btn");
     dogButton.innerText = "Good dog!";
     mainDog.append(dogButton);
 
@@ -80,23 +79,41 @@ for (let i = 0; i < data.length; i++) {
       const form = document.createElement("form");
       form.setAttribute("class", "form");
 
+      //create a label for name
+      const labelName = document.createElement("label");
+      labelName.innerText = "Dog's name";
+      form.append(labelName);
+
       const inputText = document.createElement("input");
       inputText.setAttribute("type", "text");
       inputText.setAttribute("id", "name");
       inputText.setAttribute("id", "name");
       inputText.setAttribute("name", "name");
+      inputText.setAttribute("placeholder", "Name");
       form.append(inputText);
+
+      //create a label for url
+      const labelUrl = document.createElement("label");
+      labelUrl.innerText = "Dog's picture";
+      form.append(labelUrl);
 
       const inputUrl = document.createElement("input");
       inputUrl.setAttribute("type", "url");
       inputUrl.setAttribute("id", "image");
       inputUrl.setAttribute("name", "image");
+      inputUrl.setAttribute("placeholder", "URL");
       form.append(inputUrl);
+
+      //create a label for bio
+      const labelBio = document.createElement("label");
+      labelBio.innerText = "Dog's bio";
+      form.append(labelBio);
 
       const textArea = document.createElement("textarea");
       textArea.setAttribute("rows", "5");
       textArea.setAttribute("id", "bio");
       textArea.setAttribute("name", "bio");
+      textArea.setAttribute("placeholder", "Bio");
       form.append(textArea);
 
       const submitButton = document.createElement("input");
@@ -112,3 +129,17 @@ for (let i = 0; i < data.length; i++) {
     });
   });
 }
+
+/* <form class="form">
+
+        <label for="name">Dog's name</label>
+        <input type="text" id="name" name="name">
+
+        <label for="image">Dog's picture</label>
+        <input type="url" id="image" name="image">
+
+        <label for="bio">Dog's bio</label>
+        <textarea rows="5" id="bio" name="bio"></textarea>
+
+        <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
+      </form> */
